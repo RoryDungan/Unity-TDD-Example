@@ -16,6 +16,5 @@ namespace BreakoutTests
         {
             Assert.Equal(5, Class1.Add(2, 2));
         }
-
     }
 }
