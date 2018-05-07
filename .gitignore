@@ -1,11 +1,15 @@
 Library/
 Temp/
 
-*.csproj
+/*.csproj
 *.unityproj
-*.sln
+/*.sln
 *.pidb
 *.userprefs
+
+obj
+bin
+.vs
 
 *.swp
 .DS_Store
