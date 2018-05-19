@@ -19,4 +19,14 @@
     <ProjectReference Include="..\Game\Game.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>..\Unity\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Unity\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
