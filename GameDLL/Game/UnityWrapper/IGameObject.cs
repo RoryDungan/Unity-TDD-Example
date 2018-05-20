@@ -1,6 +1,6 @@
 ﻿namespace Game.UnityWrapper
 {
-    interface IGameObject
+    public interface IGameObject
     {
         bool CompareTag(string tag);
 

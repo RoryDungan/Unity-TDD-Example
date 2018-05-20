@@ -7,6 +7,8 @@ namespace Game.BreakoutGame
     {
         private readonly ITransform transform;
 
+        private Vector3 direction = Vector3.up;
+
         public Ball(ITransform transform)
         {
             this.transform = transform;
@@ -14,7 +16,15 @@ namespace Game.BreakoutGame
 
         public void FixedUpdate(float deltaTime)
         {
-            transform.Position += Vector3.up;
+            transform.Position += direction;
+        }
+
+        public void OnCollisionEnter2D(ICollision2D other)
+        {
+            var contacts = new IContactPoint2D[1];
+            other.GetContacts(contacts);
+
+            direction = Vector3.Reflect(direction, contacts[0].Normal);
         }
     }
 }

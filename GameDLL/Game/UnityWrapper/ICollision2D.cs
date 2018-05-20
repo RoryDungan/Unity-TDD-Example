@@ -1,6 +1,6 @@
 ﻿namespace Game.UnityWrapper
 {
-    interface ICollision2D
+    public interface ICollision2D
     {
         int GetContacts(IContactPoint2D[] contacts);
 
