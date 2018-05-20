@@ -1,4 +1,6 @@
-﻿namespace Game.BreakoutGame
+﻿using Game.UnityWrapper;
+
+namespace Game.BreakoutGame
 {
     public interface IBlock
     {
@@ -8,11 +10,19 @@
         void Smash();
     }
 
-    class Block : IBlock
+    public class Block : IBlock
     {
+        private readonly IGameObject gameObject;
+
+        public Block(IGameObject gameObject)
+        {
+            this.gameObject = gameObject;
+        }
+
         public void Smash()
         {
-            throw new System.NotImplementedException();
+            // TODO: Add score
+            gameObject.Destroy();
         }
     }
 }
