@@ -6,7 +6,7 @@ namespace Game.UnityWrapper
     {
         private readonly Transform transform;
 
-        UnityTransform(Transform transform)
+        public UnityTransform(Transform transform)
         {
             this.transform = transform;
         }
