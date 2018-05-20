@@ -11,14 +11,33 @@ namespace BreakoutTests
         private Ball testObject;
         private Mock<ITransform> mockTransform;
 
-        void Init()
+        void Init(float velocity = 1f)
         {
             mockTransform = new Mock<ITransform>();
-            testObject = new Ball(mockTransform.Object);
+            testObject = new Ball(mockTransform.Object, velocity);
+        }
+
+        private static Mock<ICollision2D> SetupMockCollision(Vector3 surfaceNormal)
+        {
+            var mockContact = new Mock<IContactPoint2D>();
+            mockContact
+                .SetupGet(m => m.Normal)
+                .Returns(surfaceNormal);
+
+            var mockCollision = new Mock<ICollision2D>();
+            mockCollision
+                .Setup(m => m.GetContacts(It.IsAny<IContactPoint2D[]>()))
+                .Callback<IContactPoint2D[]>(c => c[0] = mockContact.Object)
+                .Returns(1);
+
+            mockCollision
+                .Setup(m => m.GameObject)
+                .Returns(new Mock<IGameObject>().Object);
+            return mockCollision;
         }
 
         [Fact]
-        public void initial_movement_direction_is_up()
+        void initial_movement_direction_is_up()
         {
             Init();
 
@@ -28,7 +47,7 @@ namespace BreakoutTests
         }
 
         [Fact]
-        public void movement_is_relative_to_previous_position()
+        void movement_is_relative_to_previous_position()
         {
             Init();
 
@@ -45,34 +64,51 @@ namespace BreakoutTests
         }
 
         [Fact]
-        public void direction_changes_when_ball_hits_object()
+        void movement_is_scaled_relative_to_time()
         {
             Init();
 
-            var initialPosiiton = new Vector3(3f, 2f, 0f);
-            var surfaceNormal = new Vector3(1f, -1f, 0f).normalized;
-            var endPosition = new Vector3(4f, 2f, 0f);
+            testObject.FixedUpdate(0.5f);
 
-            mockTransform
-                .SetupGet(m => m.Position)
-                .Returns(initialPosiiton);
+            mockTransform.VerifySet(
+                m => m.Position = new Vector3(0f, 0.5f, 0f), 
+                Times.Once()
+            );
+        }
 
-            var mockContact = new Mock<IContactPoint2D>();
-            mockContact
-                .SetupGet(m => m.Normal)
-                .Returns(surfaceNormal);
-
-            var mockCollision = new Mock<ICollision2D>();
-            mockCollision
-                .Setup(m => m.GetContacts(It.IsAny<IContactPoint2D[]>()))
-                .Callback<IContactPoint2D[]>(c => c[0] = mockContact.Object)
-                .Returns(1);
-
-            testObject.OnCollisionEnter2D(mockCollision.Object);
+        [Fact]
+        void movement_is_multiplied_by_velocity()
+        {
+            Init(10f);
 
             testObject.FixedUpdate(1f);
 
-            mockTransform.VerifySet(m => m.Position = endPosition, Times.Once());
+            mockTransform.VerifySet(
+                m => m.Position = new Vector3(0f, 10f, 0f), 
+                Times.Once()
+            );
+        }
+
+        [Fact]
+        void smashes_block_on_contact()
+        {
+            Init();
+
+            var mockBlock = new Mock<IBlock>();
+
+            var mockBlockObject = new Mock<IGameObject>();
+            mockBlockObject
+                .Setup(m => m.GetComponent<IBlock>())
+                .Returns(mockBlock.Object);
+
+            var mockCollision = SetupMockCollision(Vector3.down);
+            mockCollision
+                .SetupGet(m => m.GameObject)
+                .Returns(mockBlockObject.Object);
+
+            testObject.OnCollisionEnter2D(mockCollision.Object);
+
+            mockBlock.Verify(m => m.Smash(), Times.Once());
         }
     }
 }
