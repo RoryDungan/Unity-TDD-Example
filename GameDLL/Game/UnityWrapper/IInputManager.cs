@@ -2,7 +2,7 @@
 
 namespace Game.UnityWrapper
 {
-    interface IInputManager
+    public interface IInputManager
     {
         bool GetKey(KeyCode key);
     }
