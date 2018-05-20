@@ -5,7 +5,7 @@ namespace Game.BreakoutGame
     /// <summary>
     /// A surface the ball can hit, defining how the ball should react to bouncing off it.
     /// </summary>
-    interface IBounceSurface
+    public interface IBounceSurface
     {
         /// <summary>
         /// Calculate the new direction the ball should be moving in after hitting this 

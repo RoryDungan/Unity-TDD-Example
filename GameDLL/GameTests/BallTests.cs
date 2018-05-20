@@ -17,7 +17,7 @@ namespace BreakoutTests
             testObject = new Ball(mockTransform.Object, velocity);
         }
 
-        private static Mock<ICollision2D> SetupMockCollision(Vector3 surfaceNormal)
+        private static Mock<ICollision2D> SetupMockCollision(Vector3 surfaceNormal, IGameObject gameObject)
         {
             var mockContact = new Mock<IContactPoint2D>();
             mockContact
@@ -32,7 +32,8 @@ namespace BreakoutTests
 
             mockCollision
                 .Setup(m => m.GameObject)
-                .Returns(new Mock<IGameObject>().Object);
+                .Returns(gameObject);
+
             return mockCollision;
         }
 
@@ -90,6 +91,41 @@ namespace BreakoutTests
         }
 
         [Fact]
+        void takes_new_direction_from_bounce_surface()
+        {
+            Init();
+
+            var startingPosition = new Vector3(30f, 20f, 33f);
+            var surfaceNormal = Vector3.down;
+            var expectedDirection = new Vector3(-1f, -1f, 0f).normalized;
+
+            mockTransform
+                .Setup(m => m.Position)
+                .Returns(startingPosition);
+
+            var mockBounceSurface = new Mock<IBounceSurface>();
+            mockBounceSurface
+                .Setup(m => m.Bounce(startingPosition, Vector3.up, surfaceNormal))
+                .Returns(expectedDirection);
+
+            var mockObject = new Mock<IGameObject>();
+            mockObject
+                .Setup(m => m.GetComponent<IBounceSurface>())
+                .Returns(mockBounceSurface.Object);
+
+            var mockCollision = SetupMockCollision(surfaceNormal, mockObject.Object);
+
+            testObject.OnCollisionEnter2D(mockCollision.Object);
+
+            testObject.FixedUpdate(1f);
+
+            mockTransform.VerifySet(
+                m => m.Position = expectedDirection + startingPosition, 
+                Times.Once()
+            );
+        }
+
+        [Fact]
         void smashes_block_on_contact()
         {
             Init();
@@ -101,10 +137,7 @@ namespace BreakoutTests
                 .Setup(m => m.GetComponent<IBlock>())
                 .Returns(mockBlock.Object);
 
-            var mockCollision = SetupMockCollision(Vector3.down);
-            mockCollision
-                .SetupGet(m => m.GameObject)
-                .Returns(mockBlockObject.Object);
+            var mockCollision = SetupMockCollision(Vector3.down, mockBlockObject.Object);
 
             testObject.OnCollisionEnter2D(mockCollision.Object);
 
