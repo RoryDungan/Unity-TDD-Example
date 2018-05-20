@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -16,5 +17,10 @@
       <HintPath>..\Unity\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="bin/Debug/netstandard2.0/Game.dll" DestinationFolder="../../Assets/Code" />
+    <Copy SourceFiles="bin/Debug/netstandard2.0/Game.pdb" DestinationFolder="../../Assets/Code" />
+  </Target>
 
 </Project>
