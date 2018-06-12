@@ -11,12 +11,14 @@ namespace Game.Unity
 
         BreakoutGame.PaddleController paddleController;
 
-        void Awake() =>
+        void Awake()
+        {
             paddleController = new BreakoutGame.PaddleController(
                 UnityInputManager.Instance,
                 transform.Wrap(),
                 movementSpeed
             );
+        }
 
         void Update() => paddleController.Update(Time.deltaTime);
     }

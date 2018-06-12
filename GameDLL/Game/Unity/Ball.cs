@@ -11,13 +11,19 @@ namespace Game.Unity
 
         BreakoutGame.Ball ball;
 
-        void Awake() => 
+        void Awake()
+        {
             ball = new BreakoutGame.Ball(transform.Wrap(), movementSpeed);
+        }
 
-        void FixedUpdate() => 
+        void FixedUpdate()
+        {
             ball.FixedUpdate(Time.fixedDeltaTime);
+        }
 
-        void OnCollisionEnter2D(Collision2D collision) => 
+        void OnCollisionEnter2D(Collision2D collision)
+        {
             ball.OnCollisionEnter2D(collision.Wrap());
+        }
     }
 }

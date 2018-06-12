@@ -11,7 +11,10 @@ namespace Game.Unity
     {
         BreakoutGame.DefaultBounceSurface bounceSurface;
 
-        void Awake() => bounceSurface = new BreakoutGame.DefaultBounceSurface();
+        void Awake()
+        {
+            bounceSurface = new BreakoutGame.DefaultBounceSurface();
+        }
 
         public Vector3 Bounce(Vector3 hitPosition, Vector3 hitDirection, Vector3 surfaceNormal)
         {

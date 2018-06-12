@@ -8,7 +8,10 @@ namespace Game.Unity
     {
         BreakoutGame.Block block;
 
-        void Awake() => block = new BreakoutGame.Block(gameObject.Wrap());
+        void Awake()
+        {
+            block = new BreakoutGame.Block(gameObject.Wrap());
+        }
 
         public void Smash() => block.Smash();
     }
