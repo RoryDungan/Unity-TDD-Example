@@ -6,7 +6,8 @@ namespace GameTests
     class Utils
     {
         /// <summary>
-        /// Compare two Vector3 values, ignoring floating point error.
+        /// Compare two Vector3 values, with a tolerance to account for floating point 
+        /// error.
         /// </summary>
         public static void AssertEqual(Vector3 expected, Vector3 actual, float tolerance = 0.0000001f)
         {
