@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Unity
 {
-    class Block : MonoBehaviour, IBlock
+    public class Block : MonoBehaviour, IBlock
     {
         [SerializeField]
         int score = 1;

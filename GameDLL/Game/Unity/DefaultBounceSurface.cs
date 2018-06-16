@@ -7,7 +7,7 @@ namespace Game.Unity
     /// Wrap our default bounce surface up in a scriptable object so that it can be 
     /// plugged-in elsewhere.
     /// </summary>
-    class DefaultBounceSurface : MonoBehaviour, IBounceSurface
+    public class DefaultBounceSurface : MonoBehaviour, IBounceSurface
     {
         BreakoutGame.DefaultBounceSurface bounceSurface;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Unity
 {
-    class PaddleBounceSurface : MonoBehaviour, IBounceSurface
+    public class PaddleBounceSurface : MonoBehaviour, IBounceSurface
     {
         BreakoutGame.PaddleBounceSurface bounceSurface;
 

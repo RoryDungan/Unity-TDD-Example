@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Unity
 {
-    class PaddleController : MonoBehaviour
+    public class PaddleController : MonoBehaviour
     {
         [SerializeField]
         [Tooltip("The number of units per second to move.")]

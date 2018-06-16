@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Unity
 {
-    class Ball : MonoBehaviour
+    public class Ball : MonoBehaviour
     {
         [SerializeField]
         [Tooltip("How many units per second the ball should move.")]
