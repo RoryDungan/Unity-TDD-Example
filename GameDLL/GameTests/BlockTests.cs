@@ -1,7 +1,7 @@
 ﻿using Game.BreakoutGame;
 using Game.UnityWrapper;
 using Moq;
-using Xunit;
+using NUnit.Framework;
 
 namespace GameTests
 {
@@ -19,8 +19,8 @@ namespace GameTests
             testObject = new Block(mockGameObject.Object, mockGameManager.Object, score);
         }
 
-        [Fact]
-        void smashing_block_destroys_object()
+        [Test]
+        public void smashing_block_destroys_object()
         {
             Init();
 
@@ -29,8 +29,8 @@ namespace GameTests
             mockGameObject.Verify(m => m.Destroy(), Times.Once());
         }
 
-        [Fact]
-        void smashing_block_adds_score_to_GameManager()
+        [Test]
+        public void smashing_block_adds_score_to_GameManager()
         {
             const int expectedScore = 10;
 

@@ -1,8 +1,8 @@
 ﻿using Game.BreakoutGame;
 using Game.UnityWrapper;
 using Moq;
+using NUnit.Framework;
 using UnityEngine;
-using Xunit;
 
 namespace GameTests
 {
@@ -17,8 +17,8 @@ namespace GameTests
             testObject = new PaddleBounceSurface(mockTransform.Object);
         }
 
-        [Fact]
-        void hitting_middle_of_paddle_bounces_up()
+        [Test]
+        public void hitting_middle_of_paddle_bounces_up()
         {
             Init();
 
@@ -30,11 +30,11 @@ namespace GameTests
             var actualDirection = 
                 testObject.Bounce(hitPosition, inputDirection, surfaceNormal);
 
-            Assert.Equal(expectedDirection, actualDirection);
+            Assert.AreEqual(expectedDirection, actualDirection);
         }
 
-        [Fact]
-        void hitting_side_of_paddle_bounces_to_that_side()
+        [Test]
+        public void hitting_side_of_paddle_bounces_to_that_side()
         {
             Init();
 
@@ -49,8 +49,8 @@ namespace GameTests
             Utils.AssertEqual(expectedDirection, actualDirection);
         }
 
-        [Fact]
-        void hit_position_is_relative_to_paddle_position()
+        [Test]
+        public void hit_position_is_relative_to_paddle_position()
         {
             Init();
 
@@ -71,8 +71,8 @@ namespace GameTests
             Utils.AssertEqual(expectedDirection, actualDirection);
         }
 
-        [Fact]
-        void maximum_angle_is_70_degrees()
+        [Test]
+        public void maximum_angle_is_70_degrees()
         {
             Init();
 

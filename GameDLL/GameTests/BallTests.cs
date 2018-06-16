@@ -1,8 +1,8 @@
 ﻿using Game.BreakoutGame;
 using Game.UnityWrapper;
 using Moq;
+using NUnit.Framework;
 using UnityEngine;
-using Xunit;
 
 namespace BreakoutTests
 {
@@ -37,8 +37,8 @@ namespace BreakoutTests
             return mockCollision;
         }
 
-        [Fact]
-        void initial_movement_direction_is_up()
+        [Test]
+        public void initial_movement_direction_is_up()
         {
             Init();
 
@@ -47,8 +47,8 @@ namespace BreakoutTests
             mockTransform.VerifySet(m => m.Position = Vector3.up, Times.Once());
         }
 
-        [Fact]
-        void movement_is_relative_to_previous_position()
+        [Test]
+        public void movement_is_relative_to_previous_position()
         {
             Init();
 
@@ -64,8 +64,8 @@ namespace BreakoutTests
             mockTransform.VerifySet(m => m.Position = endPosition, Times.Once());
         }
 
-        [Fact]
-        void movement_is_scaled_relative_to_time()
+        [Test]
+        public void movement_is_scaled_relative_to_time()
         {
             Init();
 
@@ -77,8 +77,8 @@ namespace BreakoutTests
             );
         }
 
-        [Fact]
-        void movement_is_multiplied_by_velocity()
+        [Test]
+        public void movement_is_multiplied_by_velocity()
         {
             Init(10f);
 
@@ -90,8 +90,8 @@ namespace BreakoutTests
             );
         }
 
-        [Fact]
-        void takes_new_direction_from_bounce_surface()
+        [Test]
+        public void takes_new_direction_from_bounce_surface()
         {
             Init();
 
@@ -125,8 +125,8 @@ namespace BreakoutTests
             );
         }
 
-        [Fact]
-        void smashes_block_on_contact()
+        [Test]
+        public void smashes_block_on_contact()
         {
             Init();
 

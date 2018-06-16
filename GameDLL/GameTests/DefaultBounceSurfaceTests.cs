@@ -1,14 +1,14 @@
 ﻿using Game.BreakoutGame;
+using NUnit.Framework;
 using UnityEngine;
-using Xunit;
 using static GameTests.Utils;
 
 namespace GameTests
 {
     public class DefaultBounceSurfaceTests
     {
-        [Fact]
-        void direction_changes_when_ball_hits_object()
+        [Test]
+        public void direction_changes_when_ball_hits_object()
         {
             var testObject = new DefaultBounceSurface();
 

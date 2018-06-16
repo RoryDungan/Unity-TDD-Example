@@ -1,5 +1,5 @@
 ﻿using Game.BreakoutGame;
-using Xunit;
+using NUnit.Framework;
 
 namespace GameTests
 {
@@ -12,16 +12,16 @@ namespace GameTests
             testObject = new GameManager();
         }
 
-        [Fact]
-        void initial_score_is_0()
+        [Test]
+        public void initial_score_is_0()
         {
             Init();
 
-            Assert.Equal(0f, testObject.Score);
+            Assert.That(testObject.Score, Is.EqualTo(0f));
         }
 
-        [Fact]
-        void updating_score_stores_new_score()
+        [Test]
+        public void updating_score_stores_new_score()
         {
             Init();
 
@@ -29,11 +29,11 @@ namespace GameTests
 
             testObject.Score = expectedScore;
 
-            Assert.Equal(expectedScore, testObject.Score);
+            Assert.That(testObject.Score, Is.EqualTo(expectedScore));
         }
 
-        [Fact]
-        void updating_score_sends_score_changed_event()
+        [Test]
+        public void updating_score_sends_score_changed_event()
         {
             Init();
 
@@ -47,7 +47,7 @@ namespace GameTests
 
             testObject.Score = expectedScore;
 
-            Assert.Equal(expectedScore, newScore);
+            Assert.That(testObject.Score, Is.EqualTo(expectedScore));
         }
     }
 }

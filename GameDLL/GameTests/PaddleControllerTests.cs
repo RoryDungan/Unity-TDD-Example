@@ -1,8 +1,8 @@
 ﻿using Game.BreakoutGame;
 using Game.UnityWrapper;
 using Moq;
+using NUnit.Framework;
 using UnityEngine;
-using Xunit;
 
 namespace GameTests
 {
@@ -25,8 +25,8 @@ namespace GameTests
             );
         }
 
-        [Fact]
-        void does_not_move_when_no_key_pressed()
+        [Test]
+        public void does_not_move_when_no_key_pressed()
         {
             Init();
 
@@ -59,8 +59,8 @@ namespace GameTests
             );
         }
 
-        [Fact]
-        void pressing_left_moves_paddle_at_correct_speed()
+        [Test]
+        public void pressing_left_moves_paddle_at_correct_speed()
         {
             VerifyPaddleMovesAtCorrectSpeed(
                 10f, 
@@ -70,8 +70,8 @@ namespace GameTests
             );
         }
 
-        [Fact]
-        void pressing_right_moves_paddle_at_correct_speed()
+        [Test]
+        public void pressing_right_moves_paddle_at_correct_speed()
         {
             VerifyPaddleMovesAtCorrectSpeed(
                 10f, 
@@ -81,8 +81,8 @@ namespace GameTests
             );
         }
 
-        [Fact]
-        void pressing_a_moves_paddle_at_correct_speed()
+        [Test]
+        public void pressing_a_moves_paddle_at_correct_speed()
         {
             VerifyPaddleMovesAtCorrectSpeed(
                 10f, 
@@ -92,8 +92,8 @@ namespace GameTests
             );
         }
 
-        [Fact]
-        void pressing_d_moves_paddle_at_correct_speed()
+        [Test]
+        public void pressing_d_moves_paddle_at_correct_speed()
         {
             VerifyPaddleMovesAtCorrectSpeed(
                 10f, 
@@ -103,8 +103,8 @@ namespace GameTests
             );
         }
 
-        [Fact]
-        void pressing_opposite_directions_cancels_out()
+        [Test]
+        public void pressing_opposite_directions_cancels_out()
         {
             Init(1f);
 

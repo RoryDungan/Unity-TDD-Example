@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Xunit;
+﻿using NUnit.Framework;
+using UnityEngine;
 
 namespace GameTests
 {
@@ -11,9 +11,9 @@ namespace GameTests
         /// </summary>
         public static void AssertEqual(Vector3 expected, Vector3 actual, float tolerance = 0.0000001f)
         {
-            Assert.InRange(actual.x, expected.x - tolerance, expected.x + tolerance);
-            Assert.InRange(actual.y, expected.y - tolerance, expected.y + tolerance);
-            Assert.InRange(actual.z, expected.z - tolerance, expected.z + tolerance);
+            Assert.That(actual.x, Is.InRange(expected.x - tolerance, expected.x + tolerance));
+            Assert.That(actual.y, Is.InRange(expected.y - tolerance, expected.y + tolerance));
+            Assert.That(actual.z, Is.InRange(expected.z - tolerance, expected.z + tolerance));
         }
     }
 }
