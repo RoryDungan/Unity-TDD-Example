@@ -4,7 +4,7 @@ using Moq;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace BreakoutTests
+namespace GameTests
 {
     public class BallTests
     {
@@ -72,7 +72,7 @@ namespace BreakoutTests
             testObject.FixedUpdate(0.5f);
 
             mockTransform.VerifySet(
-                m => m.Position = new Vector3(0f, 0.5f, 0f), 
+                m => m.Position = new Vector3(0f, 0.5f, 0f),
                 Times.Once()
             );
         }
@@ -85,7 +85,7 @@ namespace BreakoutTests
             testObject.FixedUpdate(1f);
 
             mockTransform.VerifySet(
-                m => m.Position = new Vector3(0f, 10f, 0f), 
+                m => m.Position = new Vector3(0f, 10f, 0f),
                 Times.Once()
             );
         }
@@ -120,7 +120,7 @@ namespace BreakoutTests
             testObject.FixedUpdate(1f);
 
             mockTransform.VerifySet(
-                m => m.Position = expectedDirection + startingPosition, 
+                m => m.Position = expectedDirection + startingPosition,
                 Times.Once()
             );
         }
