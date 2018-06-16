@@ -9,12 +9,14 @@ namespace GameTests
     {
         private Block testObject;
         private Mock<IGameObject> mockGameObject;
+        private Mock<IGameManager> mockGameManager;
 
-        void Init()
+        void Init(int score = 1)
         {
             mockGameObject = new Mock<IGameObject>();
+            mockGameManager = new Mock<IGameManager>();
 
-            testObject = new Block(mockGameObject.Object);
+            testObject = new Block(mockGameObject.Object, mockGameManager.Object, score);
         }
 
         [Fact]
@@ -25,6 +27,18 @@ namespace GameTests
             testObject.Smash();
 
             mockGameObject.Verify(m => m.Destroy(), Times.Once());
+        }
+
+        [Fact]
+        void smashing_block_adds_score_to_GameManager()
+        {
+            const int expectedScore = 10;
+
+            Init(expectedScore);
+
+            testObject.Smash();
+
+            mockGameManager.VerifySet(m => m.Score += expectedScore, Times.Once());
         }
     }
 }
