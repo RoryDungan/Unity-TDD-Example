@@ -7,7 +7,7 @@ namespace Game.Unity
     {
         [SerializeField]
         [Tooltip("How many units per second the ball should move.")]
-        float movementSpeed;
+        float movementSpeed = 3f;
 
         BreakoutGame.Ball ball;
 

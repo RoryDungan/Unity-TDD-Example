@@ -5,7 +5,7 @@ namespace Game.BreakoutGame
     /// <summary>
     /// Singleton container for the Game Manager.
     /// </summary>
-    class GameManagerSingleton : Singleton<GameManager>
+    public class GameManagerSingleton : Singleton<GameManager>
     {
     }
 }
