@@ -14,7 +14,7 @@ public class IntegrationTests
     private IEnumerator WaitForFixedTime(float seconds)
     {
         var startTime = Time.fixedTime;
-        while (Time.fixedTime < startTime + 1f)
+        while (Time.fixedTime < startTime + seconds)
         {
             yield return new WaitForFixedUpdate();
         }
