@@ -10,11 +10,17 @@ namespace GameTests
     {
         private Ball testObject;
         private Mock<ITransform> mockTransform;
+        private Mock<IGameManager> mockGameManager;
 
         void Init(float velocity = 1f)
         {
             mockTransform = new Mock<ITransform>();
-            testObject = new Ball(mockTransform.Object, velocity);
+            mockGameManager = new Mock<IGameManager>();
+            testObject = new Ball(
+                mockTransform.Object,
+                mockGameManager.Object,
+                velocity
+            );
         }
 
         private static Mock<ICollision2D> SetupMockCollision(Vector3 surfaceNormal, IGameObject gameObject)
@@ -142,6 +148,25 @@ namespace GameTests
             testObject.OnCollisionEnter2D(mockCollision.Object);
 
             mockBlock.Verify(m => m.Smash(), Times.Once());
+        }
+
+        [Test]
+        public void hitting_death_object_triggers_game_over()
+        {
+            // Arrange
+            Init();
+
+            var mockHitObject = new Mock<IGameObject>();
+            mockHitObject.Setup(m => m.CompareTag("death"))
+                .Returns(true);
+
+            var mockCollision = SetupMockCollision(Vector3.up, mockHitObject.Object);
+
+            // Act
+            testObject.OnCollisionEnter2D(mockCollision.Object);
+
+            // Assert
+            mockGameManager.Verify(m => m.TriggerLoseCondition(), Times.Once());
         }
     }
 }

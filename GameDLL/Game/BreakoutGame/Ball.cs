@@ -6,6 +6,7 @@ namespace Game.BreakoutGame
     public class Ball
     {
         private readonly ITransform transform;
+        private readonly IGameManager gameManager;
 
         /// <summary>
         /// Units to move per second.
@@ -17,9 +18,10 @@ namespace Game.BreakoutGame
         /// </summary>
         private Vector3 direction = Vector3.up;
 
-        public Ball(ITransform transform, float velocity)
+        public Ball(ITransform transform, IGameManager gameManager, float velocity)
         {
             this.transform = transform;
+            this.gameManager = gameManager;
             this.velocity = velocity;
         }
 
@@ -30,6 +32,11 @@ namespace Game.BreakoutGame
 
         public void OnCollisionEnter2D(ICollision2D other)
         {
+            if (other.GameObject.CompareTag("death"))
+            {
+                gameManager.TriggerLoseCondition();
+            }
+
             var bounceSurface = other.GameObject.GetComponent<IBounceSurface>();
             if (bounceSurface != null)
             {
@@ -37,8 +44,8 @@ namespace Game.BreakoutGame
                 other.GetContacts(contacts);
 
                 direction = bounceSurface.Bounce(
-                    transform.Position, 
-                    direction, 
+                    transform.Position,
+                    direction,
                     contacts[0].Normal
                 );
             }

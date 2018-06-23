@@ -1,4 +1,5 @@
-﻿using Game.UnityWrapper;
+﻿using Game.BreakoutGame;
+using Game.UnityWrapper;
 using UnityEngine;
 
 namespace Game.Unity
@@ -13,7 +14,11 @@ namespace Game.Unity
 
         void Awake()
         {
-            ball = new BreakoutGame.Ball(transform.Wrap(), movementSpeed);
+            ball = new BreakoutGame.Ball(
+                transform.Wrap(),
+                GameManagerSingleton.Instance,
+                movementSpeed
+            );
         }
 
         void FixedUpdate()
