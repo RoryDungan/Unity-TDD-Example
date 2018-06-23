@@ -49,5 +49,27 @@ namespace GameTests
 
             Assert.That(testObject.Score, Is.EqualTo(expectedScore));
         }
+
+        [Test]
+        public void triggering_lose_condition_raises_game_over_event()
+        {
+            // Arrange
+            Init();
+
+            var gameOverTriggered = false;
+
+            testObject.OnGameOver += (obj, evt) =>
+            {
+                Assert.IsFalse(evt.Won);
+
+                gameOverTriggered = true;
+            };
+
+            // Act
+            testObject.TriggerLoseCondition();
+
+            // Assert
+            Assert.IsTrue(gameOverTriggered);
+        }
     }
 }

@@ -10,6 +10,13 @@ namespace Game.BreakoutGame
         int Score { get; set; }
 
         event EventHandler<ScoreChangedEventArgs> OnScoreChanged;
+
+        event EventHandler<GameOverEventArgs> OnGameOver;
+
+        /// <summary>
+        /// Should be called when the player loses the game.
+        /// </summary>
+        void TriggerLoseCondition();
     }
 
     /// <inheritdoc />
@@ -29,5 +36,13 @@ namespace Game.BreakoutGame
         }
 
         public event EventHandler<ScoreChangedEventArgs> OnScoreChanged;
+
+        public event EventHandler<GameOverEventArgs> OnGameOver;
+
+        /// <inheritdoc />
+        public void TriggerLoseCondition()
+        {
+            OnGameOver?.Invoke(this, new GameOverEventArgs(false));
+        }
     }
 }
