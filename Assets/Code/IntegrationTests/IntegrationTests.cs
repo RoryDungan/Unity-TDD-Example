@@ -34,6 +34,14 @@ public class IntegrationTests
         return ball;
     }
 
+    [TearDown]
+    public void ResetSingletons()
+    {
+        // Reset score
+        GameManagerSingleton.Instance.Score = 0;
+    }
+
+
     [UnityTest]
     public IEnumerator ball_moves_3_units_per_second()
     {
@@ -81,8 +89,6 @@ public class IntegrationTests
             Object.Destroy(ball);
             Object.Destroy(block);
 
-            // Reset score
-            GameManagerSingleton.Instance.Score = 0;
         }
     }
 }
