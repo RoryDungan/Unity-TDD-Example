@@ -1,7 +1,7 @@
 ﻿{
-    "name": "IntegrationTests",
+    "name": "UnitTests",
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
-    "references": [ "Game" ]
+    "references":  ["Game"]
 }

@@ -88,7 +88,6 @@ public class IntegrationTests
         {
             Object.Destroy(ball);
             Object.Destroy(block);
-
         }
     }
 }
